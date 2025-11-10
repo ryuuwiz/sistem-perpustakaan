@@ -68,7 +68,13 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user): RedirectResponse
     {
-        $user->update($request->validated());
+        $validated = $request->validated();
+
+        if (blank($validated['password'] ?? null)) {
+            unset($validated['password']);
+        }
+
+        $user->update($validated);
 
         return Redirect::route('users.index')
             ->with('success', 'User updated successfully');

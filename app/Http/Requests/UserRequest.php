@@ -20,6 +20,9 @@ class UserRequest extends FormRequest
     {
         $routeUser = $this->route('user');
         $userId = $routeUser instanceof User ? $routeUser->id : $routeUser;
+        $passwordRules = $this->isMethod('post')
+            ? ['required', 'string', 'min:8', 'confirmed']
+            : ['nullable', 'string', 'min:8', 'confirmed'];
 
         return [
             'name' => ['required', 'string', 'max:255'],
@@ -31,6 +34,7 @@ class UserRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($userId),
             ],
+            'password' => $passwordRules,
         ];
     }
 }

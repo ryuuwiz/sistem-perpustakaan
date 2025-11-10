@@ -10,6 +10,19 @@
         <x-text-input id="email" name="email" type="text" class="mt-1 block w-full" :value="old('email', $user?->email)" autocomplete="email" placeholder="Email"/>
         <x-input-error class="mt-2" :messages="$errors->get('email')"/>
     </div>
+    <div>
+        <x-input-label for="password" :value="__('Password')"/>
+        <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" placeholder="********"/>
+        @if ($user?->exists)
+        <p class="mt-1 text-xs text-gray-500">{{ __('Leave blank to keep the current password.') }}</p>
+        @endif
+        <x-input-error class="mt-2" :messages="$errors->get('password')"/>
+    </div>
+    <div>
+        <x-input-label for="password_confirmation" :value="__('Confirm Password')"/>
+        <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" placeholder="********"/>
+        <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')"/>
+    </div>
 
     <div class="flex items-center gap-4">
         <x-primary-button>Submit</x-primary-button>
