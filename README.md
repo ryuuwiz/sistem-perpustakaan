@@ -1,59 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Perpustakaan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem manajemen perpustakaan berbasis Laravel 12 untuk mengelola data anggota, buku, kategori, denda, peminjaman, hingga laporan PDF. Aplikasi ini dibangun di atas Laravel Breeze + Tailwind sehingga tampilannya responsif dan mudah dikembangkan.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Manajemen Anggota & Pengguna** – CRUD lengkap untuk anggota perpustakaan dan pengguna aplikasi.
+- **Katalog Buku & Kategori** – Kelola buku, kategori, dan detail seperti ISBN, tahun, jumlah halaman, serta tanggal input.
+- **Peminjaman Terintegrasi** – Catat transaksi pinjam beserta detail banyak buku sekaligus, tentukan lama pinjam, denda, dan petugas.
+- **Denda & Detail Pinjam** – Atur nominal denda serta relasi buku yang dipinjam per transaksi.
+- **Laporan PDF** – Unduh laporan anggota, buku, dan peminjaman dalam format PDF menggunakan `barryvdh/laravel-dompdf`.
+- **Dashboard Statistik** – Ringkasan cepat jumlah entitas utama setelah login.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Teknologi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2+, Laravel 12, Laravel Breeze
+- MariaDB/MySQL
+- Tailwind CSS, Alpine.js, Vite
+- DOMPDF untuk eksport PDF
 
-## Learning Laravel
+## Prasyarat
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+| Komponen | Versi yang disarankan |
+| --- | --- |
+| PHP | ≥ 8.2 (beserta ekstensi `ctype`, `curl`, `fileinfo`, `mbstring`, `openssl`, `pdo`, `tokenizer`, `xml`) |
+| Composer | ≥ 2.6 |
+| Node.js & NPM | Node ≥ 18, NPM ≥ 9 |
+| Database | MariaDB/MySQL |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalasi
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/<username>/sistem-perpustakaan.git
+cd sistem-perpustakaan
+composer install
+cp .env.example .env   # atau copy manual di Windows
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Konfigurasikan koneksi database di `.env` (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+2. Generate application key dan jalankan migrasi:
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed   # jalankan tanpa --seed jika tidak diperlukan
+   ```
+3. Install dependensi front-end:
+   ```bash
+   npm install
+   ```
 
-### Premium Partners
+## Menjalankan Aplikasi
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+php artisan serve        # http://localhost:8000
+npm run dev              # menjalankan Vite & Tailwind JIT
+```
 
-## Contributing
+Untuk build produksi:
+```bash
+npm run build
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Testing & Quality
 
-## Code of Conduct
+- Jalankan unit/feature test: `php artisan test`
+- Format kode PHP (opsional): `./vendor/bin/pint`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Struktur Penting
 
-## Security Vulnerabilities
+| Path | Deskripsi |
+| --- | --- |
+| `app/Http/Controllers` | Logika CRUD untuk anggota, buku, peminjaman, denda, laporan, dll. |
+| `app/Http/Requests` | Validasi terstruktur untuk setiap modul. |
+| `resources/views` | Blade view berbasis Breeze + Tailwind. |
+| `resources/views/reports` | Template PDF untuk ekspor laporan. |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Laporan & Ekspor
 
-## License
+- Menu **Reports** (akun terotentikasi) menampilkan daftar laporan.  
+- Tombol unduh akan menghasilkan PDF menggunakan DOMPDF. Sesuaikan template di `resources/views/reports/pdf/*.blade.php` bila ingin mengubah tampilan.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Kontribusi
+Pull request dan issue selalu terbuka. Silakan buat branch baru, ikuti gaya kode PSR-12, lalu ajukan PR setelah semua tes lulus.
+
+## Lisensi
+Proyek ini menggunakan lisensi [MIT](LICENSE). Silakan digunakan, dimodifikasi, dan didistribusikan sesuai kebutuhan.
