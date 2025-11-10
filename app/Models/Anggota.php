@@ -39,8 +39,8 @@ class Anggota extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    // public function peminjaman()
-    // {
-    //     return $this->hasMany(\App\Models\Peminjaman::class, 'id_anggota', 'id_anggota');
-    // }
+    public function peminjaman()
+    {
+        return $this->hasMany(\App\Models\Peminjaman::class, 'id_anggota', 'id_anggota');
+    }
 }

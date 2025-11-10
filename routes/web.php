@@ -35,9 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('users', UserController::class);
-    Route::resource('anggota', AnggotaController::class);
+    Route::resource('anggota', AnggotaController::class)->parameters([
+        'anggota' => 'anggota',
+    ]);
     Route::resource('buku', BukuController::class);
-    Route::resource('kategori-buku', KategoriBukuController::class);
+    Route::resource('kategori-buku', KategoriBukuController::class)->parameters([
+        'kategori-buku' => 'kategoriBuku',
+    ]);
     Route::resource('peminjaman', PeminjamanController::class);
     Route::resource('denda', DendaController::class);
 

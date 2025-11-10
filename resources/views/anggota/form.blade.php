@@ -1,5 +1,4 @@
 <div class="space-y-6">
-
     <div>
         <x-input-label for="nama" :value="__('Nama')" />
         <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full" :value="old('nama', $anggota?->nama)"
