@@ -26,6 +26,15 @@
                     <x-nav-link :href="route('kategori-buku.index')" :active="request()->routeIs('kategori-buku.*')">
                         {{ __('Kategori Buku') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('peminjaman.index')" :active="request()->routeIs('peminjaman.*')">
+                        {{ __('Peminjaman') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('denda.index')" :active="request()->routeIs('denda.*')">
+                        {{ __('Denda') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
+                        {{ __('Laporan') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                         {{ __('Users') }}
                     </x-nav-link>
@@ -90,6 +99,27 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.*')">
+                {{ __('Anggota') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')">
+                {{ __('Buku') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('kategori-buku.index')" :active="request()->routeIs('kategori-buku.*')">
+                {{ __('Kategori Buku') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('peminjaman.index')" :active="request()->routeIs('peminjaman.*')">
+                {{ __('Peminjaman') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('denda.index')" :active="request()->routeIs('denda.*')">
+                {{ __('Denda') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
+                {{ __('Laporan') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                {{ __('Users') }}
             </x-responsive-nav-link>
         </div>
 

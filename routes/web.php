@@ -2,9 +2,16 @@
 
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\DendaController;
 use App\Http\Controllers\KategoriBukuController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
+use App\Models\Anggota;
+use App\Models\Buku;
+use App\Models\Peminjaman;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,7 +19,14 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $stats = [
+        'anggota' => Anggota::count(),
+        'buku' => Buku::count(),
+        'peminjaman' => Peminjaman::count(),
+        'users' => User::count(),
+    ];
+
+    return view('dashboard', compact('stats'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -24,6 +38,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('anggota', AnggotaController::class);
     Route::resource('buku', BukuController::class);
     Route::resource('kategori-buku', KategoriBukuController::class);
+    Route::resource('peminjaman', PeminjamanController::class);
+    Route::resource('denda', DendaController::class);
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/anggota', [ReportController::class, 'anggota'])->name('reports.anggota');
+    Route::get('/reports/buku', [ReportController::class, 'buku'])->name('reports.buku');
+    Route::get('/reports/peminjaman', [ReportController::class, 'peminjaman'])->name('reports.peminjaman');
 });
 
 require __DIR__ . '/auth.php';

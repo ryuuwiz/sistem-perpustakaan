@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tgl_pinjam');
             $table->integer('lama_pinjam');
             $table->foreignId('id_anggota')->constrained('anggota', 'id_anggota');
-            $table->foreignId('id_denda')->constrained('denda', 'id_denda');
+            $table->foreignId('id_denda')->nullable()->constrained('denda', 'id_denda');
             $table->foreignId('id')->constrained('users', 'id');
         });
     }

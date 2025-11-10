@@ -18,8 +18,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DetailPinjam extends Model
 {
-    
+    protected $table = 'detail_pinjam';
     protected $perPage = 20;
+    public $timestamps = false;
+    protected $primaryKey = null;
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +39,7 @@ class DetailPinjam extends Model
     {
         return $this->belongsTo(\App\Models\Buku::class, 'id_buku', 'id_buku');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -44,5 +47,4 @@ class DetailPinjam extends Model
     {
         return $this->belongsTo(\App\Models\Peminjaman::class, 'id_pinjam', 'id_pinjam');
     }
-    
 }
