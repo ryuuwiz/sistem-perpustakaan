@@ -22,14 +22,14 @@ class BukuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required|string',
-            'pengarang' => 'required|string',
-            'penerbit' => 'required|string',
-            'tahun' => 'required',
-            'isbn' => 'required|string',
-            'tgl_input' => 'required',
-            'jml_halaman' => 'required',
-            'id_kategori' => 'required',
+            'judul' => ['required', 'string', 'max:255'],
+            'pengarang' => ['required', 'string', 'max:255'],
+            'penerbit' => ['required', 'string', 'max:255'],
+            'tahun' => ['required', 'integer'],
+            'isbn' => ['required', 'string', 'max:255'],
+            'tgl_input' => ['required', 'date'],
+            'jml_halaman' => ['required', 'integer', 'min:1'],
+            'id_kategori' => ['required', 'exists:kategori_buku,id_kategori'],
         ];
     }
 }
